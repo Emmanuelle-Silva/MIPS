@@ -17,7 +17,8 @@ begin
 	process(clk,ld) begin
 		if clk'event and clk = '1' then
 			if ld = '1' then
-			data_out_IR <= data_in_IR;
+			 data_out_IR <= data_in_IR;
+			end if;
 		end if;
 	end process;
 end;

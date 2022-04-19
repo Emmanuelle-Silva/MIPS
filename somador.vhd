@@ -1,6 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
-use IEEE.NUMERIC_STD.all;
+use IEEE.std_logic_unsigned.all;
 
 entity somador is
 	port (
@@ -9,12 +9,10 @@ entity somador is
 	);
 end somador;
 
-architecture comportamental of somador is
-signal aux_out : std_logic_vector (0 downto 15);
+architecture Behavioural of somador is
+
 begin
-		process(sum_in,IR_in_sum )
-			begin
-				aux_out<=std_logic_vector(signed(sm_in)+signed(IR_in_sum));
-		end process;
-		sum_out<=aux_out;
-end somador;
+
+    sum_out <= sum_in + IR_in_sum -1;
+
+end Behavioural;
