@@ -4,8 +4,8 @@ use IEEE.std_logic_unsigned.all;
 
 entity somador is
 	port (
-		sum_in,IR_in_sum : in std_logic_vector (0 downto 15);
-		sum_out : out std_logic_vector (0 downto 15)
+		sum_in,IR_in_sum : in std_logic_vector (15 downto 0);
+		sum_out : out std_logic_vector (15 downto 0)
 	);
 end somador;
 
