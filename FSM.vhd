@@ -148,11 +148,7 @@ begin
                         prox_estado <= saltar_se_zero;
                         
                         ra  <= ir(11 downto 8);
-                        
-                        
-                    else 
-                        prox_estado <= decodificacao;
-                        
+                          
                     end if;
                     
                     ir_ld   <='0';
