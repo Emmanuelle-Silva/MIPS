@@ -73,6 +73,7 @@ begin
                                        Y => RF_Rp_zero); 
     
     
+    W_data <= s_alu_A;
     s_a2 <= "00000000" & RF_W_data;
 
 end Behavioral;
