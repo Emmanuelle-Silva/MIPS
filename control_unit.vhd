@@ -135,4 +135,6 @@ begin
             PC_ld   => s_pc_ld
     );
     
+    rd <= s_i_rd;
+    
 end Behavioral;

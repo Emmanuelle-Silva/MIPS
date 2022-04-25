@@ -28,13 +28,13 @@ entity FSM is
         rst: in std_logic;
         ir: in std_logic_vector (15 downto 0);
         rp_zero:in std_logic;
-        --Dados de saídas para se comunicar com o bloco operacional
+        --Dados de saï¿½das para se comunicar com o bloco operacional
         -- o que tiver o pre-lebal "d_" se comunica fora do bloco operacional
         w_addr, rp_addr, rq_addr: out std_logic_vector (3 downto 0);
         w_wr, rp_rd, rq_rd, d_rd, d_wr: out std_logic;
         d_addr, w_data: out std_logic_vector (7 downto 0);
         rf_s1,rf_s0, ula_s1, ula_s0: out std_logic;
-        --Dados de saídas para se comunicar com  a parte internda da unidade de controle 
+        --Dados de saï¿½das para se comunicar com  a parte internda da unidade de controle 
         ir_ld, i_ld: out std_logic;
         PC_clr, PC_inc, PC_ld: out std_logic
     );
@@ -85,11 +85,7 @@ begin
                     d_addr  <="00000000";
                     
                 when busca =>
-                    if rp_zero = '0' then
-                        prox_estado <= decodificacao;
-                    else
-                        prox_estado <= busca;
-                    end if;
+                    prox_estado <= decodificacao;
                     ir_ld   <='1';
                     PC_clr  <='0';
                     PC_inc  <='1';
@@ -192,8 +188,8 @@ begin
                     rq_addr <="0000";
                     rq_rd   <='0';
                     
-                    rf_s1   <='1';
-                    rf_s0   <='0';
+                    rf_s1   <='0';
+                    rf_s0   <='1';
                     
                     ula_s1  <='0';
                     ula_s0  <='0';
@@ -221,8 +217,8 @@ begin
                     rq_addr <="0000";
                     rq_rd   <='0';
 
-                    rf_s1   <='X';
-                    rf_s0   <='X';
+                    rf_s1   <='0';
+                    rf_s0   <='0';
                     
                     ula_s1  <='0';
                     ula_s0  <='0';
@@ -321,37 +317,36 @@ begin
                     d_addr  <="00000000";
                     
                 when saltar_se_zero =>
+                    i_ld    <='0';
+                    ir_ld   <='0';
+                    PC_clr  <='0';
+                    PC_inc  <='0';
+                    PC_ld   <='0';
+                    
+                    w_addr  <="0000";
+                    w_data  <="00000000";
+                    w_wr    <='0';
+                    
+                    rp_addr <=ra;
+                    rp_rd   <='1';
+                    
+                    rq_addr <="0000";
+                    rq_rd   <='0';
+                    
+                    rf_s1   <='0';
+                    rf_s0   <='0';
+                    
+                    ula_s1  <='0';
+                    ula_s0  <='0';
+                    
+                    d_rd    <='0';
+                    d_wr    <='0';
+                    d_addr  <="00000000";
                     if rp_zero = '1' then
                         prox_estado <= saltar;
-                        
-                        i_ld    <='0';
-                        ir_ld   <='0';
-                        PC_clr  <='0';
-                        PC_inc  <='0';
-                        PC_ld   <='0';
-                        
-                        w_addr  <="0000";
-                        w_data  <="00000000";
-                        w_wr    <='0';
-                        
-                        rp_addr <=ra;
-                        rp_rd   <='1';
-                        
-                        rq_addr <="0000";
-                        rq_rd   <='0';
-                        
-                        rf_s1   <='0';
-                        rf_s0   <='0';
-                        
-                        ula_s1  <='0';
-                        ula_s0  <='0';
-                        
-                        d_rd    <='0';
-                        d_wr    <='0';
-                        d_addr  <="00000000";
                     else
                         prox_estado <= busca;
-                    end if; 
+                    end if;
                 when saltar =>
                     prox_estado <= busca;
                         

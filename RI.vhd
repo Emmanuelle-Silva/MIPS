@@ -3,11 +3,11 @@ use IEEE.STD_LOGIC_1164.all;
 
 --Registrador de instruções
 entity inst_reg is 
-	generic(width: integer);
+	generic(width: integer := 16);
 	port(	clk: in STD_LOGIC;
 			ld : in STD_LOGIC;
-			data_in_IR: in STD_LOGIC_VECTOR(15 downto 0);
-			data_out_IR : out STD_LOGIC_VECTOR(15 downto 0) 
+			data_in_IR: in STD_LOGIC_VECTOR(width-1 downto 0);
+			data_out_IR : out STD_LOGIC_VECTOR(width-1 downto 0) 
 		);
 end;
 
