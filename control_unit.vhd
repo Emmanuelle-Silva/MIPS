@@ -79,11 +79,16 @@ architecture Behavioral of control_unit is
         );
     end component;
     
-    signal pc_out_addr, out_IR, s_sum_out: std_logic_vector (15 downto 0);
+    signal pc_out_addr, out_IR, IR_in_sum, s_sum_out: std_logic_vector (15 downto 0);
     signal s_ir_ld, s_i_rd, s_pc_ld, s_pc_inc, s_pc_clr: std_logic;
 
 begin
     addr <= pc_out_addr;
+    IR_in_sum <= out_IR(7) & out_IR(7) & out_IR(7) & out_IR(7)
+               & out_IR(7) & out_IR(7) & out_IR(7) & out_IR(7) 
+               & out_IR(7 downto 0);
+    
+    
     PC_block: PC port map (
                 ld  => s_pc_ld,
                 clr => s_pc_clr,
@@ -95,7 +100,7 @@ begin
     
     sum: somador port map (
             sum_in => pc_out_addr,
-            IR_in_sum => out_IR, 
+            IR_in_sum => IR_in_sum, 
             sum_out => s_sum_out
         );
     

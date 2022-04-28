@@ -41,7 +41,7 @@ entity FSM is
 end FSM;
 
 architecture Behavioral of FSM is
-    type tipo_estado is (inicio,busca,decodificacao,carregar,armazenar,somar,carregar_constante,subtrair,saltar_se_zero, saltar);
+    type tipo_estado is (inicio,busca,decodificacao,carregar, carregar_2,armazenar,somar,somar_2,carregar_constante,subtrair,saltar_se_zero, saltar);
     signal prox_estado, atual_estado : tipo_estado :=inicio;
     signal ra,rb,rc : std_logic_vector (3 downto 0);
     signal d,c : std_logic_vector (7 downto 0);
@@ -170,6 +170,34 @@ begin
                     d_addr  <="00000000";
                     
                 when carregar =>
+                    prox_estado <= carregar_2;
+                    
+                    i_ld    <='0';
+                    ir_ld   <='0';
+                    PC_clr  <='0';
+                    PC_inc  <='0';
+                    PC_ld   <='0';
+
+                    w_addr  <=ra;
+                    w_wr    <='0';
+                    w_data  <="00000000";
+                    
+                    rp_addr <="0000";
+                    rp_rd   <='0';
+                    
+                    rq_addr <="0000";
+                    rq_rd   <='0';
+                    
+                    rf_s1   <='0';
+                    rf_s0   <='1';
+                    
+                    ula_s1  <='0';
+                    ula_s0  <='0';
+                    
+                    d_addr  <=d;
+                    d_rd    <='1';
+                    d_wr    <='0';
+                when carregar_2 =>
                     prox_estado <= busca;
                     
                     i_ld    <='0';
@@ -195,7 +223,7 @@ begin
                     ula_s0  <='0';
                     
                     d_addr  <=d;
-                    d_rd    <='1';
+                    d_rd    <='0';
                     d_wr    <='0';
 
                 when armazenar =>
@@ -227,8 +255,37 @@ begin
                     d_rd    <='0';
                     d_wr    <='1';
                         
-                        
+                       
                 when somar =>
+                    prox_estado <= somar_2;
+                    
+                    i_ld    <='0';
+                    ir_ld   <='0';
+                    PC_clr  <='0';
+                    PC_inc  <='0';
+                    PC_ld   <='0';
+                    
+                    w_addr  <=ra;
+                    w_wr    <='1';
+                    w_data  <="00000000";
+                    
+                    rp_addr <=rb;
+                    rp_rd   <='1';
+                                            
+                    rq_addr <=rc;
+                    rq_rd   <='1';
+                    
+                    
+                    rf_s1   <='0';
+                    rf_s0   <='0';
+                    
+                    ula_s1  <='0';
+                    ula_s0  <='1';
+                    
+                    d_rd    <='0';
+                    d_wr    <='0';
+                    d_addr  <="00000000";
+                when somar_2 =>
                     prox_estado <= busca;
                     
                     i_ld    <='0';

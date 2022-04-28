@@ -10,9 +10,8 @@ entity somador is
 end somador;
 
 architecture Behavioural of somador is
-
 begin
-
+    
     sum_out <= sum_in + IR_in_sum -1;
 
 end Behavioural;

@@ -7,14 +7,15 @@ use IEEE.STD_LOGIC_ARITH.all;
 entity memory is -- external memory accessed by MIPS
 	generic(width: integer := 16);
 	port(	clk, D_wr, D_rd: in STD_LOGIC;
-		D_addr, W_data: in STD_LOGIC_VECTOR(width-1 downto 0);
-		R_data: out STD_LOGIC_VECTOR(width-1 downto 0));
+		W_data: in STD_LOGIC_VECTOR(width-1 downto 0);
+		R_data: out STD_LOGIC_VECTOR(width-1 downto 0);
+		D_addr: in std_logic_vector(7 downto 0) );
 end;
 
 architecture synth of memory is
 begin
 	process is
-		file mem_file: text open read_mode is "memfile.dat";
+		file mem_file: text open read_mode is "memfile.mem";
 		variable L: line;
 		variable ch: character;
 		variable index, result: integer;
